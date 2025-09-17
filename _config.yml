@@ -10,10 +10,10 @@
 ############################
 
 # Name of website
-title: My website
+title: iTiSt Pages
 
 # Your name to show in the footer
-author: Some Person
+author: iTiSt
 
 ###############################################
 # --- List of links in the navigation bar --- #
@@ -250,7 +250,8 @@ footer-hover-col: "#0085A1"
 ################
 
 # Ruby Date Format to show dates of posts
-date_format: "%B %-d, %Y"
+# date_format: "%B %-d, %Y"
+date_format: "%Y - %-m - %-d"
 
 # Facebook App ID
 #fb_app_id: ""
