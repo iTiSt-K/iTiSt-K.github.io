@@ -103,7 +103,7 @@ share-links-active:
 
 # How to display the link to your website in the footer
 # Remove this if you don't want a link in the footer
-url-pretty: "MyGitHub.io"
+url-pretty: "iTiSt-K.github.io"
 
 # Add the website title to the title of every page
 title-on-all-pages: true
@@ -262,6 +262,7 @@ date_format: "%Y.%-m.%-d"
 #################################################################################
 
 # Output options (more information on Jekyll's site)
+language: ko  # 사이트 전체의 기본 언어를 한국어로 설정
 timezone: "Asia/Seoul"
 markdown: kramdown
 highlighter: rouge
