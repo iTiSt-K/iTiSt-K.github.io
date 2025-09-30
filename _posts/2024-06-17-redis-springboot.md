@@ -4,6 +4,9 @@ title: "Redis with Springboot"
 subtitle: Springboot 에서의 Redis 에 대해서 알아보자! with ChatGPT-4o
 date: 2024-06-17 10:15:00
 author: kgi0412
+cover-img: /assets/img/
+thumbnail-img: /assets/img/posts/redis-data-structures.png
+share-img: /assets/img/
 categories: wiki
 tags: [wiki, redis, springboot]
 language: ko
@@ -243,8 +246,8 @@ Jedis는 Redis를 위한 동기식 Java 클라이언트입니다. 간단하고 �
 - 멀티 스레드 이슈: 기본적으로 Jedis 인스턴스는 스레드 안전하지 않으며, 멀티 스레드 환경에서 안전하게 사용하려면 커넥션 풀을 사용해야 합니다.
 
 #### 비교
-| 특징	| Lettuce	| Jedis|
-| --- | --- | --- |
+| 특징	| Lettuce	| Jedis |
+| :----- |:------ | :------ |
 |프로그래밍 모델	|비동기 및 반응형, 동기	|동기|
 |기반 기술	|Netty	|직접 소켓|
 |멀티 스레드 지원	|네이티브 지원	|커넥션 풀 필요|
