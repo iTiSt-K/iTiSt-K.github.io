@@ -1,11 +1,14 @@
 ---
+layout: post
 title: "Redis with Springboot"
+subtitle: Springboot 에서의 Redis 에 대해서 알아보자! with ChatGPT-4o
 date: 2024-06-17 10:15:00
-categories: wiki
 author: kgi0412
-tags: wiki redis springboot
+categories: wiki
+tags: [wiki, redis, springboot]
+language: ko
+comments: true
 ---
-with ChatGPT-4o
 
 ## Redis
 Redis (REmote DIctionary Server)는 오픈 소스 인메모리 데이터 구조 저장소로, 다양한 데이터 구조(문자열, 해시, 리스트, 셋, 정렬된 셋, 비트맵, 하이퍼로그로그, 지오스페이셜 인덱스 및 스트림)를 지원합니다. Redis는 주로 데이터베이스, 캐시 및 메시지 브로커로 사용됩니다.
@@ -19,7 +22,7 @@ Redis (REmote DIctionary Server)는 오픈 소스 인메모리 데이터 구조 
 
 #### 2. 다양한 데이터 구조:
 
-![redis-data-structures](/assets/images/posts/redis-data-structures.png)
+![redis-data-structures](/assets/img/posts/redis-data-structures.png)
 
 - String: 단순한 키-값 쌍.
 - List: 순서가 있는 문자열 컬렉션.
