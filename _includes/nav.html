@@ -30,6 +30,19 @@
           </li>
         {%- endif -%}
       {%- endfor -%}
+
+      <!-- 카테고리 드롭다운 추가: 여기 삽입 -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategories" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownCategories">
+          {% for category in site.categories %}
+            {% assign cat_name = category | first %}
+            <a class="dropdown-item" href="/categories/{{ cat_name }}.html">{{ cat_name | capitalize }}</a>
+            <!-- 포스트 수 표시하려면: ({{ category | last | size }}개) 추가 -->
+          {% endfor %}
+        </div>
+      </li>
+      
       {% if site.post_search %}
         <li class="nav-item">
           <a class="nav-link" id="nav-search-link" href="#" title="Search">
