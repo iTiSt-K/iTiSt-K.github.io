@@ -7,7 +7,7 @@ author: kgi0412
 cover-img:
 thumbnail-img:
 share-img:
-categories: wiki
+categories: [wiki, blog]
 tags: [wiki, RaspberryPi, HomeAssistant]
 language: ko
 comments: true

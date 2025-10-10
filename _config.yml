@@ -26,6 +26,14 @@ navbar-links:
     - Learn markdown: "https://www.markdowntutorial.com/"
   Author's home: "https://blog.naver.com/yeppplus"
 
+###############################################
+# --- List of links in the collections --- #
+###############################################
+collections:
+  categories:
+    output: true
+    permalink: /categories/:name.html
+
 ################
 # --- Logo --- #
 ################
