@@ -12,6 +12,20 @@
 
   <div class="collapse navbar-collapse" id="main-navbar">
     <ul class="navbar-nav ml-auto">
+      
+      <!-- 카테고리 드롭다운 추가 -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategories" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownCategories">
+          {% for page in site.pages %}
+            {% if page.layout == "category" %}
+              <a class="dropdown-item" href="{{ page.url | relative_url }}">{{ page.title | capitalize }}</a>
+              <!-- ({% assign cat_posts = site.posts | where: 'categories', page.title | downcase | size %}{{ cat_posts }}) -->
+            {% endif %}
+          {% endfor %}
+        </div>
+      </li>
+
       {%- for link in site.navbar-links -%}
         {%- if link[1].first %}
           <li class="nav-item dropdown">
@@ -31,19 +45,6 @@
         {%- endif -%}
       {%- endfor -%}
 
-      <!-- 카테고리 드롭다운 추가 -->
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategories" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownCategories">
-          {% for page in site.pages %}
-            {% if page.layout == "category" %}
-              <a class="dropdown-item" href="{{ page.url | relative_url }}">{{ page.title | capitalize }}</a>
-              <!-- ({% assign cat_posts = site.posts | where: 'categories', page.title | downcase | size %}{{ cat_posts }}) -->
-            {% endif %}
-          {% endfor %}
-        </div>
-      </li>
-      
       {% if site.post_search %}
         <li class="nav-item">
           <a class="nav-link" id="nav-search-link" href="#" title="Search">

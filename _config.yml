@@ -20,11 +20,12 @@ author: iTiSt
 ###############################################
 
 navbar-links:
-  About Me: "aboutme"
+  About Me:
+    - About Me: "aboutme"
+    - Author's home: "https://blog.naver.com/yeppplus"
   Resources:
     - Beautiful Jekyll: "https://beautifuljekyll.com"
     - Learn markdown: "https://www.markdowntutorial.com/"
-  Author's home: "https://blog.naver.com/yeppplus"
 
 ###############################################
 # --- List of links in the collections --- #
