@@ -21,7 +21,7 @@
           {% for cat in cat_collection.docs %}
             {% assign cat_name = cat.title | downcase %}
             {% assign post_count = site.posts | where: 'categories', cat_name | size %}
-            <a class="dropdown-item" href="{{ cat.url | relative_url }}">{{ cat.title | capitalize }} ({{ post_count }} posts)</a>
+            <a class="dropdown-item" href="{{ cat.url | relative_url }}">{{ cat.title | capitalize }} ({{ post_count }})</a>
           {% endfor %}
         </div>
       </li>
