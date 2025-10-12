@@ -20,6 +20,7 @@ author: iTiSt
 ###############################################
 
 navbar-links:
+  Tag: "tags"
   About Me:
     - About Me: "aboutme"
     - Author's home: "https://blog.naver.com/yeppplus"
