@@ -306,6 +306,7 @@ defaults:
       type: "posts"
     values:
       layout: "post"
+      full-width: true  # 모든 포스트에 와이드 적용
       comments: false  # add comments to all blog posts
       social-share: false # add social media sharing buttons to all blog posts
   -

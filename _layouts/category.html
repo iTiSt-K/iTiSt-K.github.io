@@ -7,17 +7,12 @@ layout: page
 <h2>포스트 목록</h2>
 <ul>
   {% assign category_name = page.title | downcase %}
-  {% assign post_count = 0 %}
-  {% for post in site.posts %}
-    {% for cat in post.categories %}
-      {% if cat | downcase == category_name %}
-        {% assign post_count = post_count | plus: 1 %}
-        <li>
-          <a href="{{ post.url }}">{{ post.title }}</a> - {{ post.date | date: "%Y-%m-%d" }}
-        </li>
-        {% break %}  <!-- 매치되면 루프 중단, 중복 피함 -->
-      {% endif %}
-    {% endfor %}
+  {% assign filtered_posts = site.posts | where: "categories", category_name %}
+  {% assign post_count = filtered_posts | size %}
+  {% for post in filtered_posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a> - {{ post.date | date: "%Y-%m-%d" }}
+    </li>
   {% endfor %}
   {% if post_count == 0 %}
     <p>아직 포스트가 없습니다.</p>
