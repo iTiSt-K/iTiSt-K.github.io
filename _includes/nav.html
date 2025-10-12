@@ -17,9 +17,11 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategories" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownCategories">
-          {% for category in site.categories %}
-            {% assign cat_name = category | first %}
-            <a class="dropdown-item" href="/categories/{{ cat_name }}.html">{{ cat_name | capitalize }} ({{ category | last | size }} posts)</a>
+          {% assign cat_collection = site.collections | where: "label", "categories" | first %}
+          {% for cat in cat_collection.docs %}
+            {% assign cat_name = cat.title | downcase %}
+            {% assign post_count = site.posts | where: 'categories', cat_name | size %}
+            <a class="dropdown-item" href="{{ cat.url | relative_url }}">{{ cat.title | capitalize }} ({{ post_count }} posts)</a>
           {% endfor %}
         </div>
       </li>
