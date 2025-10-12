@@ -4,3 +4,22 @@ title: 개발 노트
 subtitle: 하나 하나 기록 하다보면, 늘어가는 개발 지식!
 language: ko  # 페이지 언어를 한국어로 설정
 ---
+
+테스트 
+
+{{ site.collections.categories }}
+@@@@@
+
+{{ site.collections.categories.docs | size }}
+@@@@@
+
+{% for doc in site.collections.categories.docs %}
+    {{ doc.title }}<br>
+{% endfor %}
+@@@@@
+
+{% for collection in site.collections %}
+    {% if collection.label != "posts" %}
+        {{ collection.label }}: {{ collection.docs.size }}<br>
+    {% endif %}
+{% endfor %}
