@@ -7,15 +7,20 @@ language: ko  # 페이지 언어를 한국어로 설정
 
 테스트 
 
-{{ site.collections.categories }}
+{{ site.categories | size }}  <!-- 2 출력 -->
 @@@@@
 
-{{ site.collections.categories.docs.size }}
+{% assign cat_collection = site.collections | where: "label", "categories" | first %}
+{{ cat_collection.docs | size }}  <!-- 2 출력 -->
 @@@@@
 
-{% for doc in site.collections.categories.docs %}
-    {{ doc.title }}<br>
-{% endfor %}
+{% assign cat_docs = site.categories %}
+<ul>
+  {% for doc in cat_docs %}
+    <li>{{ doc.title }} (URL: {{ doc.url }})</li>
+  {% endfor %}
+</ul>
+<!-- 또는 배열 크기: {{ cat_docs.size }} -->
 @@@@@
 
 {% for collection in site.collections %}
