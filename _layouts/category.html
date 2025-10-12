@@ -6,8 +6,7 @@ layout: page
 
 <h2>포스트 목록</h2>
 <ul>
-    <!-- {% assign category_name = page.title | downcase %} -->
-    {% assign category_name = page.title%}
+    {% assign category_name = page.title | downcase %}
     {% assign filtered_posts = site.posts | where: "categories", category_name %}
     {% assign post_count = filtered_posts | size %}
     {% for post in filtered_posts %}

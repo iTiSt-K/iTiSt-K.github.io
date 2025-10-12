@@ -306,7 +306,7 @@ defaults:
       type: "posts"
     values:
       layout: "post"
-      full-width: true  # 모든 포스트에 와이드 적용
+      # full-width: true  # 모든 포스트에 와이드 적용
       comments: false  # add comments to all blog posts
       social-share: false # add social media sharing buttons to all blog posts
   -
@@ -314,6 +314,10 @@ defaults:
       path: "" # any file that's not a post will be a "page" layout by default
     values:
       layout: "page"
+
+# Custom CSS
+site-css:
+  - "/assets/css/custom-width.css"  # 새 CSS 파일 로드
 
 # Exclude these files from production site
 exclude:

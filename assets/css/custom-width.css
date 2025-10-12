@@ -1,0 +1,21 @@
+/* 포스트/페이지 내용 영역을 적당히 넓히기 (1200px 예시, 원하는 값으로 변경) */
+.post-content,
+.page-content {
+  max-width: 1200px;  /* full-width(100%) 대신 1200px로 적당히 넓게. 1000px나 1400px도 OK */
+  margin: 0 auto;     /* 중앙 정렬 유지 */
+  padding: 0 20px;    /* 양쪽 여백 조정 (기본 15px) */
+}
+
+/* 전체 컨테이너도 약간 넓히기 (선택) */
+.container {
+  max-width: 1300px;  /* container 기본 1140px → 1300px로 */
+}
+
+/* 모바일에서 너무 넓지 않게 */
+@media (max-width: 768px) {
+  .post-content,
+  .page-content {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+}
