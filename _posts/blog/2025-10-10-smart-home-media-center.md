@@ -8,7 +8,7 @@ author: kgi0412
 # thumbnail-img:
 # share-img:
 categories: [wiki, blog]
-tags: [wiki, RaspberryPi, HomeAssistant]
+tags: [ChatGPT, RaspberryPi, HomeAssistant]
 language: ko
 comments: true
 ---
@@ -56,6 +56,7 @@ comments: true
 - **원격 전원 관리**: WoL로 PC 전원 효율적 제어.
 
 ## 전력 소모
+
 | 장치 | 상태 | 전력 소모 | 월간 전력 (24시간 365일 또는 2시간/일) | 월 전기료 (한국 기준, 약 200원/kWh) |
 |------|------|-----------|---------------------------------------|-------------------------------------|
 | Raspberry Pi 4/5 (HAOS + NAS) | 항상 켜짐 | 유휴: 3-5W, NAS 포함: 10-15W | 7-10 kWh | 1,400-2,000원 |
