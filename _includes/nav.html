@@ -17,11 +17,10 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategories" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownCategories">
-          {% for cat in site.collections.categories.docs %}
-            <a class="dropdown-item" href="{{ cat.url | relative_url }}">{{ cat.title | capitalize }} ({{ cat.title | downcase | append: '' | where: 'categories', cat.title | downcase | size }} posts)</a>  <!-- 포스트 수 테스트 -->
+          {% for category in site.categories %}
+            {% assign cat_name = category | first %}
+            <a class="dropdown-item" href="/categories/{{ cat_name }}.html">{{ cat_name | capitalize }} ({{ category | last | size }} posts)</a>
           {% endfor %}
-          <!-- 디버그: 전체 docs 개수 -->
-          <div class="dropdown-item disabled">Total categories: {{ site.collections.categories.docs | size }}</div>  <!-- 0이면 문제, 2(blog + dev-notes)면 OK -->
         </div>
       </li>
 
