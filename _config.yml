@@ -32,7 +32,7 @@ navbar-links:
 ###############################################
 collections:
   categories:
-    output: true
+    output: false
     permalink: /categories/:name.html
 
 ################
