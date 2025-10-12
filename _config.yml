@@ -283,28 +283,30 @@ kramdown:
 
 # Default YAML values (more information on Jekyll's site)
 defaults:
-  -
-    scope:
-      path: "_posts/blog"
-      type: "posts"
-    values:
-      layout: "post"
-      categories: [blog]  # 개인 블로그 카테고리 자동
-  -
-    scope:
-      path: "_posts/dev-notes"
-      type: "posts"
-    values:
-      layout: "post"
-      categories: [dev-notes]  # 개발 노트 카테고리 자동
+  # -
+  #   scope:
+  #     path: "_posts/blog"
+  #     type: "posts"
+  #   values:
+  #     layout: "post"
+  #     categories: [blog]  # 개인 블로그 카테고리 자동
+  #     comments: true
+  # -
+  #   scope:
+  #     path: "_posts/dev-notes"
+  #     type: "posts"
+  #   values:
+  #     layout: "post"
+  #     categories: [dev-notes]  # 개발 노트 카테고리 자동
+  #     social-share: true
   -
     scope:
       path: ""
       type: "posts"
     values:
       layout: "post"
-      comments: true  # add comments to all blog posts
-      social-share: true # add social media sharing buttons to all blog posts
+      comments: false  # add comments to all blog posts
+      social-share: false # add social media sharing buttons to all blog posts
   -
     scope:
       path: "" # any file that's not a post will be a "page" layout by default

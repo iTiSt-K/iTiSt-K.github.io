@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "Redis with Springboot"
-subtitle: Springboot 에서의 Redis 에 대해서 알아보자!
-date: 2024-06-17 10:15:00
+subtitle: "Springboot 에서의 Redis 에 대해서 알아보자!"
+date: 2024-06-17
 author: kgi0412
 # cover-img: /assets/img/
 thumbnail-img: /assets/img/posts/redis-data-structures.png
 # share-img: /assets/img/
-categories: wiki
+categories: [wiki, dev-notes]
 tags: [wiki, redis, springboot]
 language: ko
 comments: true

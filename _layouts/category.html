@@ -1,4 +1,4 @@
----
+<!-- ---
 layout: page
 ---
 
@@ -14,4 +14,25 @@ layout: page
     </li>
     {% endif %}
   {% endfor %}
+</ul> -->
+---
+layout: page
+---
+
+{{ content }}
+
+<h2>포스트 목록</h2>
+<ul>
+  {% assign category_name = page.title | downcase %}
+  {% for post in site.posts %}
+    {% for cat in post.categories %}
+      {% if cat | downcase == category_name %}
+        <li>
+          <a href="{{ post.url }}">{{ post.title }}</a> - {{ post.date | date: "%Y-%m-%d" }}
+        </li>
+        {% break %}  <!-- 매치되면 루프 중단, 중복 피함 -->
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+  {% if forloop.last and no posts %}<p>아직 포스트가 없습니다.</p>{% endif %}
 </ul>

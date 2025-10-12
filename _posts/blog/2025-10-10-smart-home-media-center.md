@@ -2,11 +2,11 @@
 layout: post
 title: "Raspberry Pi and HomeAssistant OS"
 subtitle: "라즈베리파이 HAOS + NAS 및 LibreELEC(Kodi) PC 통합 시스템"
-date: 2025-10-10 13:00:00
+date: 2025-10-10
 author: kgi0412
-cover-img:
-thumbnail-img:
-share-img:
+# cover-img:
+# thumbnail-img:
+# share-img:
 categories: [wiki, blog]
 tags: [wiki, RaspberryPi, HomeAssistant]
 language: ko
