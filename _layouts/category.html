@@ -5,6 +5,7 @@ layout: page
 {{ content }}
 
 <h2>포스트 목록</h2>
+<h3>Test : {{ page.json }}</h3>
 {% assign category_name = page.title | downcase %}
 <h4>카테고리명 : {{ category_name }}</h4>
 {% assign filtered_posts = site.posts | where: "categories", category_name %}
