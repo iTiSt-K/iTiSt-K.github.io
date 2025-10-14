@@ -1,25 +1,31 @@
 ---
-layout: page
+layout: default
 ---
 
-{{ content }}
+<h1 class="page-title">{{ page.title }} 카테고리의 글</h1>
 
-<h2>포스트 목록</h2>
-<pre>
-  # page inspect
-{{ page | inspect }}
-</pre>
-{% assign category_name = page.title | downcase %}
-<h4>카테고리명 : {{ category_name }}</h4>
-{% assign filtered_posts = site.posts | where: "categories", category_name %}
-<ul>
-    {% assign post_count = filtered_posts | size %}
-    {% for post in filtered_posts %}
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a> - {{ post.date | date: "%Y-%m-%d" }}
-    </li>
+{% assign category_name = page.slug %}
+<div class="post-list">
+  {% assign posts_in_category = site.posts | where_exp: "post", "post.categories contains category_name" %}
+  {% if posts_in_category.size > 0 %}
+    {% for post in posts_in_category %}
+      <article class="post-card">
+        <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+        <p class="post-meta">
+          {{ post.date | date: "%Y-%m-%d" }}
+          {% if post.author %} · {{ post.author }}{% endif %}
+        </p>
+
+        {% if post.summary %}
+          <p class="summary">{{ post.summary }}</p>
+        {% else %}
+          <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
+        {% endif %}
+
+        <a class="read-more" href="{{ post.url | relative_url }}">Read more →</a>
+      </article>
     {% endfor %}
-    {% if post_count == 0 %}
-    <p>아직 포스트가 없습니다.</p>
-    {% endif %}
-</ul>
+  {% else %}
+    <p>이 카테고리에 해당하는 글이 없습니다.</p>
+  {% endif %}
+</div>
