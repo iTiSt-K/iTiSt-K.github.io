@@ -5,9 +5,10 @@ layout: page
 {{ content }}
 
 <h2>포스트 목록</h2>
+{% assign category_name = page.title | downcase %}
+<h4>카테고리명 : {{ category_name }}</h4>
+{% assign filtered_posts = site.posts | where: "categories", category_name %}
 <ul>
-    {% assign category_name = page.title | downcase %}
-    {% assign filtered_posts = site.posts | where: "categories", category_name %}
     {% assign post_count = filtered_posts | size %}
     {% for post in filtered_posts %}
     <li>

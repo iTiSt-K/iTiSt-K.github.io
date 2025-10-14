@@ -8,14 +8,14 @@ author: kgi0412
 # thumbnail-img: /assets/img/posts/
 # share-img: /assets/img/
 categories: [wiki, dev]
-tags: [ChatGPT, springboot]
+tags: [ChatGPT, springboot, CORS, OPTIONS]
 language: ko
 comments: true
 ---
 
-# Spring Boot RESTful API에서 CORS와 `OPTIONS` 요청 처리 가이드
+# Spring Boot RESTful API 및 Spring MVC에서 CORS와 `OPTIONS` 요청 처리 가이드
 
-이 문서는 Spring Boot 기반 RESTful API에서 `Allow`와 `Access-Control-Allow-Methods` 헤더의 차이, `OPTIONS` 요청 처리 방법, 브라우저의 CORS 동작, 그리고 Nginx와의 상호작용을 정리한 가이드입니다. 서버 간 호출 전용 API에서 브라우저 요청을 차단하는 데 초점을 맞췄습니다.
+이 문서는 Spring Boot 기반 RESTful API 서비스를 중심으로 `Allow`와 `Access-Control-Allow-Methods` 헤더의 차이, `OPTIONS` 요청 처리 방법, 브라우저의 CORS 동작, 그리고 Nginx와의 상호작용을 정리한 가이드입니다. 서버 간 호출 전용 API에서 브라우저 요청을 차단하는 데 초점을 맞췄으며, 비교 참고로 Spring MVC 기반 내용을 추가로 다룹니다.
 
 ## 1. `Allow`와 `Access-Control-Allow-Methods`의 차이
 
@@ -44,12 +44,12 @@ comments: true
 ```mermaid
 graph TD
     A[Browser: 비단순 요청<br>(예: POST with Content-Type: application/json)] -->|1. 프리플라이트 요청<br>OPTIONS /api/test| B{Nginx}
-    B -->|프록시| C[Spring Boot API]
+    B -->|프록시| C[Spring Boot/MVC API]
 
     subgraph 정상 흐름
         C -->|2. 200 OK<br>Access-Control-Allow-Origin: *<br>Access-Control-Allow-Methods: GET, POST| D[Browser: 프리플라이트 성공]
-        D -->|3. 본 요청<br>POST /api/test| E[Spring Boot API]
-        E -->|4. 200 OK<br>JSON 응답| F[Browser: 요청 성공]
+        D -->|3. 본 요청<br>POST /api/test| E[Spring Boot/MVC API]
+        E -->|4. 200 OK<br>JSON 응답 (REST)<br>또는 View (MVC)| F[Browser: 요청 성공]
     end
 
     subgraph 메서드 미지원 (405)
@@ -63,7 +63,7 @@ graph TD
     end
 
     subgraph 단순 요청 (프리플라이트 없음)
-        K[Browser: 단순 요청<br>(예: GET /api/test)] -->|1. 본 요청| L[Spring Boot API]
+        K[Browser: 단순 요청<br>(예: GET /api/test)] -->|1. 본 요청| L[Spring Boot/MVC API]
         L -->|2. 200 OK<br>Access-Control-Allow-Origin 없음| M[Browser: CORS 정책 위반]
         M --> N[응답 차단<br>콘솔 에러]
     end
@@ -86,12 +86,12 @@ graph TD
 
 ## 3. 서버 간 전용 RESTful API에서 브라우저 요청 차단
 
-서버 간 호출 전용 API에서 브라우저 요청을 차단하려면:
+서버 간 호출 전용 RESTful API에서 브라우저 요청을 차단하려면:
 
 1. **CORS 비활성화**: `Access-Control-Allow-Origin` 등 CORS 헤더 제거.
 2. `OPTIONS`**를** `405`**로 처리**: 프리플라이트 실패로 비단순 요청 차단.
 
-### Spring Boot에서 `OPTIONS`를 `405`로 처리
+### Spring Boot RESTful API에서 `OPTIONS` 처리
 
 #### 인터셉터로 `OPTIONS` 차단
 
@@ -169,13 +169,85 @@ public class SecurityConfig {
 - `OPTIONS` → `405`, CORS 헤더 없음.
 - 브라우저 요청 차단, 서버 간 호출 정상.
 
-### 단순 요청 처리
+#### RESTful API 컨트롤러 예시
 
-- 프리플라이트 없이 본 요청 전송.
-- CORS 비활성화 → `Access-Control-Allow-Origin` 없음 → 브라우저 응답 차단.
-- **리소스 소모**: 서버가 본 요청 처리 (예: DB 조회), 하지만 브라우저에서 데이터 접근 불가.
+```java
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-## 4. Nginx와의 상호작용
+@RestController
+@RequestMapping("/api")
+public class ApiController {
+    @GetMapping("/test")
+    public String getTest() {
+        return "{\"message\": \"GET response\"}";
+    }
+
+    @PostMapping("/test")
+    public String postTest() {
+        return "{\"message\": \"POST response\"}";
+    }
+}
+```
+
+**결과**:
+
+- 단순 요청: `Access-Control-Allow-Origin` 없음 → 브라우저 응답 차단.
+- 비단순 요청: `OPTIONS` → `405` → 본 요청 차단.
+
+## 4. Spring MVC와의 비교 (참고)
+
+Spring MVC는 뷰 렌더링(예: JSP, Thymeleaf)을 중심으로 동작하며, RESTful API와 달리 응답이 주로 HTML입니다. 서버 간 호출 전용이 아닌, 웹 애플리케이션에 적합합니다.
+
+### Spring MVC에서 `OPTIONS` 처리
+
+Spring MVC에서는 `@Controller`를 사용하며, `OPTIONS` 요청을 명시적으로 처리하거나 인터셉터로 차단 가능.
+
+#### 컨트롤러에서 `OPTIONS` 처리
+
+```java
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+@Controller
+@RequestMapping("/example")
+public class ExampleController {
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public String getTest() {
+        return "testView"; // 예: testView.jsp
+    }
+
+    @RequestMapping(value = "/test", method = RequestMethod.OPTIONS)
+    public ResponseEntity<Void> handleOptions() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Allow", "GET, POST");
+        return new ResponseEntity<>(headers, HttpStatus.METHOD_NOT_ALLOWED); // 405
+    }
+}
+```
+
+**차이점**:
+
+- **RESTful API**: JSON 응답 (`@RestController`), 서버 간 호출 최적화.
+- **MVC**: 뷰 렌더링 (`@Controller`), 브라우저 UI 중심.
+- **CORS 처리**: MVC는 CORS를 활성화하여 브라우저 요청을 허용하는 경우가 많음. 서버 간 전용 API라면 RESTful API와 동일하게 CORS 비활성화 가능.
+
+#### 인터셉터로 `OPTIONS` 차단 (MVC 동일)
+
+RESTful API와 동일한 인터셉터 사용 가능 (위 `BlockOptionsInterceptor` 참조).
+
+**결과**:
+
+- MVC에서도 `OPTIONS` → `405`로 브라우저 요청 차단 가능.
+- 뷰 렌더링이 필요 없으므로 `ResponseEntity`로 응답 제어.
+
+## 5. Nginx와의 상호작용
 
 Nginx가 프록시로 사용될 때, CORS 헤더나 `OPTIONS` 응답 수정에 주의해야 합니다.
 
@@ -227,7 +299,7 @@ location /api {
 - Spring의 `405` 응답과 CORS 비활성화 유지.
 - 브라우저 요청 차단.
 
-## 5. 리소스 소모 최소화
+## 6. 리소스 소모 최소화
 
 단순 요청은 서버 리소스를 소모하므로, 이를 줄이는 방법:
 
@@ -251,7 +323,7 @@ public class ApiController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                                 .body("Browser requests are not allowed");
         }
-        return ResponseEntity.ok("GET response");
+        return ResponseEntity.ok("{\"message\": \"GET response\"}");
     }
 }
 ```
@@ -271,14 +343,15 @@ location /api {
 }
 ```
 
-## 6. 결론
+## 7. 결론
 
 - **비단순 요청**: `OPTIONS` → `405` → 프리플라이트 실패 → 요청 차단, 리소스 소모 없음.
 - **단순 요청**: 본 요청 → CORS 헤더 없음 → 브라우저 응답 차단, 리소스 소모 있음.
 - **Nginx 주의**: `OPTIONS`를 `200`으로 처리하거나 CORS 헤더 추가 시 브라우저 요청 허용 가능.
+- **Spring MVC 비교**: RESTful API는 JSON 중심, MVC는 뷰 렌더링 중심. CORS 비활성화 및 `OPTIONS` 처리 방식은 동일 적용 가능.
 - **최적화**: CORS 비활성화, `OPTIONS`를 `405`로 처리, `Origin` 체크로 리소스 소모 최소화.
 
-## 7. 테스트 방법
+## 8. 테스트 방법
 
 - **비단순 요청**:
 
