@@ -3,8 +3,6 @@ layout: default
 title: "모든 카테고리"
 ---
 
-<h1>{{ page.title }}</h1>
-
 <style>
   .category-grid {
     display: grid;
@@ -51,6 +49,8 @@ title: "모든 카테고리"
     margin: 0;
   }
 </style>
+
+<h1>{{ page.title }}</h1>
 
 <div class="category-grid">
   {% for category in site.categories %}
