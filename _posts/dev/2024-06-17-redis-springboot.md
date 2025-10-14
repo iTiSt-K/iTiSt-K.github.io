@@ -7,8 +7,8 @@ author: kgi0412
 # cover-img: /assets/img/
 thumbnail-img: /assets/img/posts/redis-data-structures.png
 # share-img: /assets/img/
-categories: [wiki, dev-notes]
-tags: [ChatGPT, redis, springboot]
+categories: [wiki, dev]
+tags: [ChatGPT, springboot, redis]
 language: ko
 comments: true
 ---
