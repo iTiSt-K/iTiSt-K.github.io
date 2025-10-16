@@ -53,9 +53,5 @@ title: "전체 카테고리"
 <h1>{{ page.title }}</h1>
 
 <div class="category-grid">
-  <!-- {% for category in site.categories %}
-    {% assign cat_name = category[0] %}
-    {% assign cat_posts = category[1] %}
-  {% endfor %} -->
-{{ site | inspect }}
+Test
 </div>
