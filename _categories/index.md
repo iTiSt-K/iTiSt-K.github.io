@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "모든 카테고리"
+title: "전체 카테고리"
 ---
 
 <style>
@@ -51,3 +51,26 @@ title: "모든 카테고리"
 </style>
 
 <h1>{{ page.title }}</h1>
+
+<div class="category-grid">
+  {% for category in site.categories %}
+    {% assign cat_name = category[0] %}
+    {% assign cat_posts = category[1] %}
+    {% assign cat_page = site.pages | where: "slug", cat_name | first %}
+
+    <a class="category-card" href="{{ '/categories/' | append: cat_name | relative_url }}">
+      {% if cat_page and cat_page.image %}
+        <img src="{{ cat_page.image | relative_url }}" alt="{{ cat_page.title }}">
+      {% else %}
+        <img src="/assets/images/default-category.jpg" alt="Default Image">
+      {% endif %}
+      <div class="category-card-content">
+        <h2>{{ cat_page.title | default: cat_name }}</h2>
+        <p>{{ cat_posts.size }}개의 포스트</p>
+        {% if cat_page and cat_page.description %}
+          <p>{{ cat_page.description }}</p>
+        {% endif %}
+      </div>
+    </a>
+  {% endfor %}
+</div>
