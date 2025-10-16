@@ -57,7 +57,5 @@ Test consoles
 </div>
 
 <script>
-    console.log({{ site | jsonify }});
-    // console.log({{ site.pages | jsonify }});
-    // console.log({{ site.categories | jsonify }});
+    console.log({{ site.categories | jsonify }});
 </script>
