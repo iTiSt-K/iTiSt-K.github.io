@@ -53,6 +53,11 @@ title: "전체 카테고리"
 <h1>{{ page.title }}</h1>
 
 <div class="category-grid">
-Test
-{{ site | inspect }}
+Test consoles
 </div>
+
+<script>
+    console.log({{ site | jsonify }});
+    // console.log({{ site.pages | jsonify }});
+    // console.log({{ site.categories | jsonify }});
+</script>
