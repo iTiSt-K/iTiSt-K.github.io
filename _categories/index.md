@@ -56,7 +56,13 @@ title: "전체 카테고리"
   {% for category in site.categories %}
     {% assign cat_name = category[0] %}
     {% assign cat_posts = category[1] %}
-    {% assign cat_page = site.pages | where: "slug", cat_name | first %}
+
+    {% assign cat_page = nil %}
+    {% for p in site.pages %}
+      {% if p.slug == cat_name %}
+        {% assign cat_page = p %}
+      {% endif %}
+    {% endfor %}
 
     <a class="category-card" href="{{ '/categories/' | append: cat_name | relative_url }}">
       {% if cat_page and cat_page.image %}
@@ -64,6 +70,7 @@ title: "전체 카테고리"
       {% else %}
         <img src="/assets/images/default-category.jpg" alt="Default Image">
       {% endif %}
+
       <div class="category-card-content">
         <h2>{{ cat_page.title | default: cat_name }}</h2>
         <p>{{ cat_posts.size }}개의 포스트</p>
