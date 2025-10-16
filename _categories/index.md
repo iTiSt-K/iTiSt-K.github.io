@@ -56,6 +56,14 @@ title: "전체 카테고리"
 Test consoles
 </div>
 
+
+<script id="debug-data" type="application/json">
+  {
+    "page": {{ page | jsonify }},
+    "site": {{ site | jsonify }}
+  }
+</script>
 <script>
-    console.log({{ site.categories | jsonify }});
+  const debugData = JSON.parse(document.getElementById('debug-data').textContent);
+  console.log(debugData);
 </script>
