@@ -54,4 +54,5 @@ title: "전체 카테고리"
 
 <div class="category-grid">
 Test
+{{ site | inspect }}
 </div>
