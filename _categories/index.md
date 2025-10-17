@@ -56,10 +56,14 @@ title: "전체 카테고리"
 Test consoles
 </div>
 
+<pre>
+{{ page | inspect }}
+</pre>
+
 
 <script id="debug-data" type="application/json">
   {
-    "page": {{ page | jsonify }},
+    "page": "",
     "site": ""
   }
 </script>
