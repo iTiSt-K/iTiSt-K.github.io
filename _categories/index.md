@@ -59,8 +59,8 @@ Test consoles
 
 <script id="debug-data" type="application/json">
   {
-    "page": "",
-    "site": {{ site | jsonify }}
+    "page": {{ page | jsonify }},
+    "site": ""
   }
 </script>
 <script>
