@@ -1,3 +1,18 @@
+---
+layout: post
+title: "JDK21의 Virtual Threads"
+subtitle: "Spring Boot에서 Virtual Threads와 Platform Threads 비교 및 최적화 가이드"
+date: 2025-10-24
+author: kgi0412
+# cover-img: /assets/img/
+# thumbnail-img: /assets/img/posts/
+# share-img: /assets/img/
+categories: [wiki, dev]
+tags: [ChatGPT, springboot, jdk21, virtual_threads]
+language: ko
+comments: true
+---
+
 # Spring Boot에서 Virtual Threads와 Platform Threads 비교 및 최적화 가이드
 
 ## 1. 개요
