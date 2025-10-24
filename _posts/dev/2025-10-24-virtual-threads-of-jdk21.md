@@ -8,7 +8,7 @@ author: kgi0412
 # thumbnail-img: /assets/img/posts/
 # share-img: /assets/img/
 categories: [wiki, dev]
-tags: [ChatGPT, springboot, jdk21, virtual_threads]
+tags: [ChatGPT, springboot, jdk21, VirtualThreads]
 language: ko
 comments: true
 ---
@@ -77,33 +77,22 @@ public class LoadTestController {
 
     private final MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
 
-    @GetMapping("/load-test3")
-    public String loadTest3(
-            @RequestParam(defaultValue = "10000") int requests,
+    @GetMapping("/load-test")
+    public String loadTest(
+            @RequestParam(defaultValue = "1000") int requests,
             @RequestParam(defaultValue = "true") boolean useVirtualThreads,
             @RequestParam(defaultValue = "10") int delayMs) {
-        
-        // ForkJoinPool 튜닝 (Virtual Threads용)
-        if (useVirtualThreads) {
-            System.setProperty("jdk.virtualThreadScheduler.maxPoolSize", "16");
-            System.setProperty("jdk.virtualThreadScheduler.minRunnable", "8");
-        }
 
         // 스레드 풀 설정
         ExecutorService executor = useVirtualThreads
                 ? Executors.newVirtualThreadPerTaskExecutor()
-                : Executors.newFixedThreadPool(400, r -> {
-                    Thread t = new Thread(r);
-                    t.setName("platform-thread-" + t.getId());
-                    return t;
-                });
+                : Executors.newFixedThreadPool(400);
 
         // 활성 스레드 모니터링
         ScheduledThreadPoolExecutor scheduler = new ScheduledThreadPoolExecutor(2);
         scheduler.scheduleWithFixedDelay(() -> {
-            System.out.println("Thread.activeCount: " + Thread.activeCount() + 
-                               ", Virtual: " + useVirtualThreads);
-        }, 300L, 300L, TimeUnit.MILLISECONDS);
+            System.out.println("Thread.activeCount: " + Thread.activeCount() + ", Virtual: " + useVirtualThreads);
+        }, 100L, 100L, TimeUnit.MILLISECONDS);
 
         // 메모리 및 시간 측정
         long startTime = System.currentTimeMillis();
@@ -118,9 +107,7 @@ public class LoadTestController {
                 try {
                     Thread.sleep(delayMs);
                     successCount.incrementAndGet();
-                    System.out.println("Request " + requestId + " on thread: " + 
-                                       Thread.currentThread() + 
-                                       ", isVirtual: " + Thread.currentThread().isVirtual());
+                    System.out.println("Request " + requestId + " on thread: " + Thread.currentThread() + ", isVirtual: " + Thread.currentThread().isVirtual());
                 } catch (InterruptedException e) {
                     errorCount.incrementAndGet();
                     System.err.println("Error in request " + requestId + ": " + e.getMessage());
@@ -450,10 +437,3 @@ curl "http://localhost:8080/fit/load-test3?requests=10000&useVirtualThreads=true
 # Platform Threads
 curl "http://localhost:8080/fit/load-test3?requests=10000&useVirtualThreads=false&delayMs=10"
 ```
-
----
-
-**작성자**: \[Your Name\]\
-**작성일**: 2025년 10월 24일\
-**프로젝트**: RESTful API 프록시 서비스\
-**목적**: GitHub Pages 배포용 문서
