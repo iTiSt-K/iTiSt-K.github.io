@@ -16,7 +16,7 @@ language: ko
 ## 프로필
 [<img src="https://github.com/favicon.ico" width="32"> GitHub]({{ site.github.owner_url }})
 
-![iTiSt's trophy](https://github-profile-trophy.vercel.app/?username=iTiSt-K)
+![iTiSt's trophy](https://github-profile-trophy.vercel.app/?username=iTiSt-K&no-bg=true&no-frame=true)
 
 ![iTiSt's github stats](https://github-readme-stats.vercel.app/api?username=iTiSt-K&show_icons=true)
 
