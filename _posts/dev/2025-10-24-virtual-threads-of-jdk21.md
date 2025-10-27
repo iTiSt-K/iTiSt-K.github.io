@@ -437,3 +437,11 @@ curl "http://localhost:8080/fit/load-test3?requests=10000&useVirtualThreads=true
 # Platform Threads
 curl "http://localhost:8080/fit/load-test3?requests=10000&useVirtualThreads=false&delayMs=10"
 ```
+
+
+---
+
+## 🧰 참고 링크
+- [JDK 21의 신기능 Virtual Thread 알아보기 / 제4회 Kakao Tech Meet](https://tech.kakao.com/posts/608)
+- [java 21 가상 스레드 Virtual Thread / Blog](https://blog.naver.com/seban21/223138158582)
+- [가상 스레드(Virtual Thread) / Blog](https://cafe.naver.com/hdongwook/1271)
