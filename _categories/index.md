@@ -57,9 +57,8 @@ Test consoles
 </div>
 
 <pre>
-{{ page | inspect }}
+{{ page.title }}
 </pre>
-
 
 <script id="debug-data" type="application/json">
   {
