@@ -5,7 +5,7 @@ subtitle: PuristDev — "The art of simple, honest code."
 language: ko
 ---
 
-## It's Me
+## It's me
 
 - 현명하고 예쁜 와이프가 사랑해주는 남편.
     - 그런 와이프를 사랑하는 나.
